@@ -29,7 +29,7 @@ def pie_chart(df,col):
     df_dt['index1'] = df_dt.index
     df_dt.columns = ['Number', col]
     import plotly.express as px
-    fig = px.pie(df_dt, values='Number', names=col, color_discrete_sequence=px.colors.sequential.Burg)
+    fig = px.pie(df_dt, values='Number', names=col, color_discrete_sequence=px.colors.sequential.Burg, width=500, height=500)
     return fig
 
 def bar_chart(df,col):
@@ -211,10 +211,16 @@ if st.session_state.deptbutton:
             st.subheader(str(selected_dept)+' Department Scopus') 
             st.dataframe(df_dept_sel)
             st.info('Total Artitle ' + str(len(df_dept_sel.index)))
-            st.write("**Term by Years Graph**")
-            st.plotly_chart(bar_chart(df_term_years,'Year'))
-            st.dataframe(df_term_years)
-            st.info('Total Term ' + str(len(df_term_years.index)))
+
+            col1, col2 = st.columns([3,2])
+            with col1:
+                st.plotly_chart(bar_chart(df_term_years,'Year'))
+            with col2:
+                st.header("")
+                st.header("")
+                st.dataframe(df_term_years)
+                st.info('Total Term ' + str(len(df_term_years.index)))
+                
             visual_df(df_dept_sel)
         else: st.warning("Please select Department")
             
