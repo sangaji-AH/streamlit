@@ -1,6 +1,6 @@
 import spacy
 import re
-nlp = spacy.load("en_core_web_sm")
+nlp = spacy.load("en_core_web_sm-3.2.0")
 class paper:
 
     
