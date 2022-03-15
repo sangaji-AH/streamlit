@@ -3,7 +3,7 @@ import pandas as pd
 import paper_extraction as pe
 from itertools import chain
 
-@st.cache(suppress_st_warning=True)
+@st.cache(allow_output_mutation=True)
 
 def upload_data():
     df = pd.read_excel("scopus_its.xls")
@@ -133,7 +133,8 @@ def search_term_df(df,term):
 st.set_page_config(page_title='ITS SCOPUS', layout="wide")
 st.title("ITS SCOPUS")
 if 'data' not in st.session_state:
-    st.session_state.data = upload_data()
+    df = upload_data()
+    st.session_state.data = df
 df = st.session_state.data
 st.dataframe(df)
 st.info('Total Artitle ' + str(len(df.index)))
