@@ -7,7 +7,6 @@ from itertools import chain
 
 def upload_data():
     df = pd.read_excel("scopus_its.xls")
-    df = df[['Authors','Year','Affiliations','Document Type','Abstract','Title','Link']]
     return df.applymap(str)
 
 def tkd(df):
@@ -134,6 +133,7 @@ st.set_page_config(page_title='ITS SCOPUS', layout="wide")
 st.title("ITS SCOPUS")
 if 'data' not in st.session_state:
     df = upload_data()
+    df = df[['Authors','Year','Affiliations','Document Type','Abstract','Title','Link']]
     st.session_state.data = df
 df = st.session_state.data
 st.dataframe(df)
