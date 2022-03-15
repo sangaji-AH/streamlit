@@ -8,6 +8,7 @@ streamlit = "1.7.0"
 spacy = "*"
 pandas = "*"
 openpyxl = "*"
+plotly = "*"
 
 [dev-packages]
 
