@@ -77,16 +77,18 @@ class paper:
                                     dpt = dpt[:dpt.index("engineering")+1]
                                 except: pass
                                 dpt = ' '.join(dpt)
-                                
-                            # if "and" not in dpt:
-                            #     a = []
-                            #     for w in dpt.split(" "):
-                            #         if len(w)<4:
-                            #             w = None
-                            #         else: w=w
-                            #         a.append(w)
-                            #     a = list(filter(None, a))
-                            #     dpt = ' '.join(dpt)
+
+                            dpt = dpt.split(" ")
+                            if len(dpt) > 1:
+                                a = []
+                                for w in dpt:
+                                    if len(w)<=3 and w != "and":
+                                        w = None
+                                    else: w=w
+                                    a.append(w)
+                                a = list(filter(None, a))
+                                dpt = ' '.join(a)
+                            else: dpt = ' '.join(dpt)
                             dpt=dpt.strip().rstrip()
                             a.append(True)
                                 
