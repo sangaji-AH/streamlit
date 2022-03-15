@@ -1,1 +1,1 @@
-web: sh setup.sh && streamlit scopus_app.py
+web: sh setup.sh && streamlit run scopus_app.py

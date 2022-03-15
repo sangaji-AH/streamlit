@@ -5,7 +5,7 @@ from itertools import chain
 
 
 def upload_data():
-    df = pd.read_excel("web_app\scopus_its\scopus_its.xls")
+    df = pd.read_excel("scopus_its.xls")
     df = df[['Authors','Year','Affiliations','Document Type','Abstract','Title','Link']]
     return df.applymap(str)
 
