@@ -131,8 +131,9 @@ def search_term_df(df,term):
 
 st.set_page_config(page_title='ITS SCOPUS', layout="wide")
 st.title("ITS SCOPUS")
-
-df = upload_data()
+if 'data' not in st.session_state:
+    st.session_state.data = upload_data()
+df = st.session_state.data
 st.dataframe(df)
 st.info('Total Artitle ' + str(len(df.index)))
 
