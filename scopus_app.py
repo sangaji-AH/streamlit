@@ -3,6 +3,7 @@ import pandas as pd
 import paper_extraction as pe
 from itertools import chain
 
+@st.cache(suppress_st_warning=True)
 
 def upload_data():
     df = pd.read_excel("scopus_its.xls")
