@@ -6,7 +6,7 @@ from itertools import chain
 @st.cache(allow_output_mutation=True)
 
 def upload_data():
-    df = pd.read_excel("scopus_its_2.xls")
+    df = pd.read_excel("web_app\scopus_its\scopus_its_2.xls")
     return df.applymap(str)
 
 def tkd(df):
@@ -186,6 +186,7 @@ if st.session_state.termbutton:
         df_dept = df_dept[['TKD','Authors','Year','Affiliations','Document Type','Abstract','Title','Term','Department','Link']]
         st.dataframe(df_dept)
         st.session_state.deptbutton = True
+        df_dept['Term'] = df_dept.Term.apply(lambda x: x.replace("[","").replace("]","").replace("'","").split(","))
 
 if st.session_state.deptbutton:
 
@@ -247,6 +248,4 @@ if st.session_state.deptbutton:
             st.info('Total Artitle ' + str(len(df_search.index)))
             visual_df(df_search,selected_re)
         else: st.warning("Please select Term")
-        
-
         
