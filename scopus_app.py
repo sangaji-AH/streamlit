@@ -10,21 +10,6 @@ def upload_data():
     df = df.applymap(str)
     return df
 
-def tkd(df):
-    with st.spinner('Wait for it...'):
-        df['TKD'] = df.Title.apply(lambda x: pe.paper().tkd_judul(x))
-    return df
-
-def term(df):
-    with st.spinner('Wait for it...'):
-        df['Term'] = df.Title.apply(lambda x: pe.paper().nphrase(x))
-    return df
-
-def dept(df):
-    with st.spinner('Wait for it...'):
-        df['Department'] = df.Affiliations.apply(lambda x: pe.paper().dept(x))
-    return df
-
 def pie_chart(df,col):
     df_dt = pd.DataFrame(df[col].value_counts())
     df_dt['index1'] = df_dt.index
@@ -154,11 +139,7 @@ if "button" not in st.session_state:
 st.subheader("Artitle TKD Category")
 
 if st.button('Run TKD Category') or st.session_state.tkdbutton:
-    if "tkd" not in st.session_state:
-        # st.session_state.tkd = tkd(df)
-        st.session_state.tkd = st.session_state.data
-    df_tkd = st.session_state.tkd
-    df_tkd = df_tkd[['TKD','Authors','Year','Affiliations','Document Type','Abstract','Title','Link']]
+    df_tkd = st.session_state.data[['TKD','Authors','Year','Affiliations','Document Type','Abstract','Title','Link']]
     st.dataframe(df_tkd)
     st.session_state.tkdbutton = True
 
@@ -167,11 +148,7 @@ if st.session_state.tkdbutton:
     st.subheader("Research Terms")
 
     if st.button('Extract Research Terms') or st.session_state.termbutton:
-        if "term" not in st.session_state:
-            # st.session_state.term = term(st.session_state.tkd)
-            st.session_state.term = st.session_state.data
-        df_term = st.session_state.term
-        df_term = df_term[['TKD','Authors','Year','Affiliations','Document Type','Abstract','Title','Term','Link']]
+        df_term = st.session_state.data[['TKD','Authors','Year','Affiliations','Document Type','Abstract','Title','Term','Link']]
         st.dataframe(df_term)
         st.session_state.termbutton = True
 
@@ -180,11 +157,7 @@ if st.session_state.termbutton:
     st.subheader("Department")
 
     if st.button('Run') or st.session_state.deptbutton:
-        if "dept" not in st.session_state:
-            # st.session_state.dept = dept(st.session_state.term)
-            st.session_state.dept = st.session_state.data
-        df_dept = st.session_state.dept
-        df_dept = df_dept[['TKD','Authors','Year','Affiliations','Document Type','Abstract','Title','Term','Department','Link']]
+        df_dept = st.session_state.data[['TKD','Authors','Year','Affiliations','Document Type','Abstract','Title','Term','Department','Link']]
         st.dataframe(df_dept)
         st.session_state.deptbutton = True
         df_dept['Term'] = df_dept.Term.apply(lambda x: x.replace("[","").replace("]","").replace("'","").split(","))
