@@ -156,7 +156,7 @@ st.subheader("Artitle TKD Category")
 if st.button('Run TKD Category') or st.session_state.tkdbutton:
     if "tkd" not in st.session_state:
         # st.session_state.tkd = tkd(df)
-        st.session_state.tkd = df
+        st.session_state.tkd = st.session_state.data
     df_tkd = st.session_state.tkd
     df_tkd = df_tkd[['TKD','Authors','Year','Affiliations','Document Type','Abstract','Title','Link']]
     st.dataframe(df_tkd)
@@ -169,7 +169,7 @@ if st.session_state.tkdbutton:
     if st.button('Extract Research Terms') or st.session_state.termbutton:
         if "term" not in st.session_state:
             # st.session_state.term = term(st.session_state.tkd)
-            st.session_state.term = df
+            st.session_state.term = st.session_state.data
         df_term = st.session_state.term
         df_term = df_term[['TKD','Authors','Year','Affiliations','Document Type','Abstract','Title','Term','Link']]
         st.dataframe(df_term)
@@ -182,7 +182,7 @@ if st.session_state.termbutton:
     if st.button('Run') or st.session_state.deptbutton:
         if "dept" not in st.session_state:
             # st.session_state.dept = dept(st.session_state.term)
-            st.session_state.dept = df
+            st.session_state.dept = st.session_state.data
         df_dept = st.session_state.dept
         df_dept = df_dept[['TKD','Authors','Year','Affiliations','Document Type','Abstract','Title','Term','Department','Link']]
         st.dataframe(df_dept)
