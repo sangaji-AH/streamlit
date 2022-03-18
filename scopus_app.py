@@ -6,8 +6,7 @@ from itertools import chain
 @st.cache(allow_output_mutation=True)
 
 def upload_data():
-    # df = pd.read_excel("scopus_its.xls")
-    df = pd.read_csv("scopus_its.csv",sep='|')
+    df = pd.read_excel("scopus_its_2.xls")
     return df.applymap(str)
 
 def tkd(df):
