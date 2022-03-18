@@ -6,7 +6,8 @@ from itertools import chain
 @st.cache(allow_output_mutation=True)
 
 def upload_data():
-    df = pd.read_excel("scopus_its.xls")
+    # df = pd.read_excel("scopus_its.xls")
+    df = pd.read_csv("scopus_its.csv",sep='|')
     return df.applymap(str)
 
 def tkd(df):
@@ -133,6 +134,7 @@ st.set_page_config(page_title='ITS SCOPUS', layout="wide")
 st.title("ITS SCOPUS")
 if 'data' not in st.session_state:
     df = upload_data()
+    st.session_state.data_all = df
     df = df[['Authors','Year','Affiliations','Document Type','Abstract','Title','Link']]
     st.session_state.data = df
 df = st.session_state.data
@@ -153,7 +155,8 @@ st.subheader("Artitle TKD Category")
 
 if st.button('Run TKD Category') or st.session_state.tkdbutton:
     if "tkd" not in st.session_state:
-        st.session_state.tkd = tkd(df)
+        # st.session_state.tkd = tkd(df)
+        st.session_state.tkd = st.session_state.data_all
     df_tkd = st.session_state.tkd
     df_tkd = df_tkd[['TKD','Authors','Year','Affiliations','Document Type','Abstract','Title','Link']]
     st.dataframe(df_tkd)
@@ -165,7 +168,8 @@ if st.session_state.tkdbutton:
 
     if st.button('Extract Research Terms') or st.session_state.termbutton:
         if "term" not in st.session_state:
-            st.session_state.term = term(st.session_state.tkd)
+            # st.session_state.term = term(st.session_state.tkd)
+            st.session_state.term = st.session_state.data_all
         df_term = st.session_state.term
         df_term = df_term[['TKD','Authors','Year','Affiliations','Document Type','Abstract','Title','Term','Link']]
         st.dataframe(df_term)
@@ -177,7 +181,8 @@ if st.session_state.termbutton:
 
     if st.button('Run') or st.session_state.deptbutton:
         if "dept" not in st.session_state:
-            st.session_state.dept = dept(st.session_state.term)
+            # st.session_state.dept = dept(st.session_state.term)
+            st.session_state.dept = st.session_state.data_all
         df_dept = st.session_state.dept
         df_dept = df_dept[['TKD','Authors','Year','Affiliations','Document Type','Abstract','Title','Term','Department','Link']]
         st.dataframe(df_dept)
