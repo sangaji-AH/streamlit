@@ -124,7 +124,7 @@ if 'data' not in st.session_state:
 df_data = st.session_state.data
 df_data = df_data[['Authors','Year','Affiliations','Document Type','Abstract','Title','Link']]
 st.dataframe(df_data)
-st.info('Total Artitle ' + str(len(df.index)))
+st.info('Total Artitle ' + str(len(df_data.index)))
 
 
 
